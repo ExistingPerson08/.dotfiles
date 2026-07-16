@@ -185,14 +185,10 @@ remove-deckloader:
     echo "Restart Steam to apply changes"
 
 [group("setups")]
-install-recommended-flatpaks:
+install-geforce:
     #!/bin/bash
     GEFORCE_URL="https://international.download.nvidia.com/GFNLinux/GeForceNOWSetup.bin"
     GEFORCE_BIN="/tmp/GeForceNOWSetup.bin"
-
-    flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    xargs -a ~/.local/share/dotfiles/flatpaks-recommended.list flatpak install --system -y
-
     curl -L "$GEFORCE_URL" -o "$GEFORCE_BIN"
     chmod +x "$GEFORCE_BIN"
     "$GEFORCE_BIN"

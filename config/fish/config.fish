@@ -70,7 +70,7 @@ end
 
 alias open 'xdg-open &>/dev/null'
 alias nano micro
-alias spacefin-cli 'just -f ~/.local/share/dotfiles/Justfile'
+alias config-cli 'just -f ~/.local/share/dotfiles/Justfile'
 alias zed zeditor
 alias f fuck
 
