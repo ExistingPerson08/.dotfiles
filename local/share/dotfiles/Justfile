@@ -1,0 +1,243 @@
+set quiet := true
+
+[group("system")]
+battery:
+    upower -i /org/freedesktop/UPower/devices/battery_BAT0
+
+[group("system")]
+cleanup:
+    run0 podman image prune -af
+    run0 podman volume prune -f
+    podman image prune -af
+    podman volume prune -f
+    flatpak uninstall --unused
+    brew autoremove
+    brew cleanup
+    spacefin-dotfiles cleanup
+
+[group("system")]
+bios:
+    #!/usr/bin/bash
+    if [ -d /sys/firmware/efi ]; then
+        read -rp 'The system will reboot into UEFI firmware settings. Proceed? (y/N) ' proceed
+        if [[ "$proceed" == [Yy]* ]]; then
+            systemctl reboot --firmware-setup
+        fi
+    else
+        echo "Rebooting to legacy BIOS from OS is not supported."
+    fi
+
+[group("system")]
+logs-this-boot:
+    run0 journalctl -b 0
+
+[group("system")]
+logs-last-boot:
+    run0 journalctl -b -1
+
+[group("system")]
+update:
+    ~/.local/share/dotfiles/scripts/update.sh
+
+[group('DOOM')]
+powerwash:
+    #!/usr/bin/bash
+    if command -v bctl &>/dev/null; then
+        exec bctl powerwash
+    fi
+
+    echo "Warning: This is an experimental feature that will reset this device to its factory state."
+    read -p "Do you want to continue? (y/N): " CONFIRM
+    if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+        echo "Powerwash cancelled."
+        exit 0
+    fi
+    read -p "Are you sure? (y/N): " CONFIRM2
+    if [[ ! "$CONFIRM2" =~ ^[Yy]$ ]]; then
+        echo "Powerwash cancelled."
+        exit 0
+    fi
+
+    sudo bootc install reset --experimental
+
+[group("setups")]
+setup-modding:
+    echo ""
+    echo "Installing r2modman"
+    echo ""
+    TEMP_FILE="/tmp/r2modman.flatpak"
+    curl -L "https://github.com/ebkr/r2modmanPlus/releases/download/v3.2.15/r2modman-3.2.15-x86_64.flatpak" -o "$TEMP_FILE"
+    run0 flatpak install -y --system "$TEMP_FILE"
+    rm "$TEMP_FILE"
+    echo ""
+    echo "Installing Curseforge app"
+    echo ""
+    TEMP_FILE="/tmp/curseforge.AppImage"
+    flatpak install -y --system flathub it.mijorus.gearlever
+    curl -L "https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage" -o "$TEMP_FILE"
+    flatpak run it.mijorus.gearlever --integrate "$TEMP_FILE" -y --replace
+    echo ""
+    echo "Installing Proton tools"
+    echo ""
+    flatpak install -y --system flathub net.davidotek.pupgui2
+    flatpak install -y --system flathub com.github.Matoking.protontricks
+    echo ""
+    echo "Modding setup finished!"
+
+[group("setups")]
+setup-dev:
+    brew tap --trust ublue-os/tap
+    brew install --cask vscodium-linux
+    brew install lazygit uv gh
+    echo ""
+    echo "Developer setup finished!"
+
+[group("setups")]
+setup-blink:
+    brew install trash-cli atuin ranger scrcpy cowsay cmatrix commitizen tealdeer
+
+[group("setups")]
+setup-touchscreen:
+    rm -f ~/.config/niri/touchscreen.kdl
+    cp ~/.local/share/dotfiles/configs/touchscreen.kdl ~/.config/niri/
+
+[group("setups")]
+setup-workspace-rules:
+    rm -f ~/.config/niri/workspaces.kdl
+    cp ~/local/share/dotfiles/configs/workspaces.kdl ~/.config/niri/
+
+[group("setups")]
+install-plex:
+    /usr/share/spacefin/scripts/plex-install.sh
+
+[group("setups")]
+remove-plex:
+    /usr/share/spacefin/scripts/plex-remove.sh
+
+[group("steam")]
+install-steamcmd:
+    #!/usr/bin/bash
+    echo "Installing SteamCMD..."
+    echo ""
+    mkdir -p ~/.steam
+    curl -L https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o /tmp/steamcmd.tar.gz
+    tar -xvzf /tmp/steamcmd.tar.gz -C ~/.steam
+    rm /tmp/steamcmd.tar.gz
+    if [[ -f ~/.steam/steamcmd.sh ]]; then
+        mkdir -p ~/.local/bin
+        rm -f ~/.local/bin/steamcmd
+        printf '#!/usr/bin/bash\nexec ~/.steam/steamcmd.sh "$@"\n' > ~/.local/bin/steamcmd
+        chmod +x ~/.local/bin/steamcmd
+    fi
+    echo "SteamCMD was installed."
+
+[group("steam")]
+remove-steamcmd:
+    rm -f "$HOME/.local/bin/steamcmd"
+    rm -f "$HOME/.steam/steamcmd.sh"
+    echo "SteamCMD has been uninstalled."
+
+[group("steam")]
+install-scopebuddy:
+    run0 curl -Lo /usr/local/bin/scopebuddy https://raw.githubusercontent.com/HikariKnight/ScopeBuddy/refs/heads/main/bin/scopebuddy
+    run0 chmod +x /usr/local/bin/scopebuddy
+    run0 ln -s scopebuddy /usr/local/bin/scb
+    echo "Scopebuddy was installed."
+    echo "Tip: Install Scopebuddy gui (flatpak install --system io.github.rfrench3.scopebuddy-gui) for GUI configuration"
+
+[group("steam")]
+remove-scopebuddy:
+    run0 rm /usr/local/bin/scopebuddy
+    run0 rm /usr/local/bin/scb
+    echo "Scopebuddy was removed."
+
+[group("steam")]
+install-millennium:
+    /usr/share/spacefin/scripts/millennium-patch.sh
+
+[group("steam")]
+remove-millennium:
+    rm -rf ~/.local/share/Millennium
+    rm -f /var/tmp/millennium
+    rm -f ~/.local/share/Steam/ubuntu12_32/libXtst.so.6
+    rm -f ~/.local/share/Steam/ubuntu12_64/libXtst.so.6
+    rm -f ~/.local/share/Steam/ubuntu12_64/libmillennium_hhx64.so
+
+    echo "Millennium was removed."
+    echo "Restart Steam to apply changes"
+
+[group("steam")]
+install-deckloader:
+    /usr/share/spacefin/scripts/deckloader-patch.sh
+
+[group("steam")]
+remove-deckloader:
+    #!/usr/bin/bash
+    HOMEBREW_FOLDER="/home/${USER}/homebrew"
+
+    run0 systemctl disable --now plugin_loader.service > /dev/null
+    run0 rm -f "/var/home/${USER}/.config/systemd/user/plugin_loader.service"
+    run0 rm -f "/etc/systemd/system/plugin_loader.service"
+    run0 rm -r "${HOMEBREW_FOLDER}"
+    run0 rm "/var/home/${USER}/.steam/steam/.cef-enable-remote-debugging"
+
+    echo "Deckloader was removed."
+    echo "Restart Steam to apply changes"
+
+[group("setups")]
+install-recommended-flatpaks:
+    #!/bin/bash
+    GEFORCE_URL="https://international.download.nvidia.com/GFNLinux/GeForceNOWSetup.bin"
+    GEFORCE_BIN="/tmp/GeForceNOWSetup.bin"
+
+    flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    xargs -a ~/.local/share/dotfiles/flatpaks-recommended.list flatpak install --system -y
+
+    curl -L "$GEFORCE_URL" -o "$GEFORCE_BIN"
+    chmod +x "$GEFORCE_BIN"
+    "$GEFORCE_BIN"
+
+[group("utilities")]
+toggle-mac-randomization:
+    #! /bin/run0 /bin/bash
+    RAND_MAC_FILE="/etc/NetworkManager/conf.d/rand_mac.conf"
+
+    if test -e $RAND_MAC_FILE; then
+        rm -f $RAND_MAC_FILE
+        echo "MAC randomization disabled."
+        systemctl restart NetworkManager
+    else
+        echo "MAC randomization can be stable (persisting the same random MAC per access point across disconnects/reboots),"
+        echo "or it can be randomized per-connection (every time it connects to the same access point it uses a new MAC)."
+        randomization_choice=""
+        read -rp "Do you want to use per-connection Wi-Fi MAC address randomization? [y/N] " randomization_choice
+
+        if [[ "$randomization_choice" == [Yy]* ]]; then
+            randomization_level=random
+            echo "Selected state: per-connection"
+        else
+            randomization_level=stable
+            echo "Selected state: per-network (stable)"
+        fi
+        cat <<EOL > $RAND_MAC_FILE
+    [device-mac-randomization]
+    # "yes" is already the default for scanning
+    wifi.scan-rand-mac-address=yes
+
+    [connection-mac-randomization]
+    # Generate a random MAC for each Network and associate the two permanently.
+    ethernet.cloned-mac-address=stable
+    wifi.cloned-mac-address=$randomization_level
+    EOL
+        chmod 644 $RAND_MAC_FILE
+        echo "MAC randomization enabled."
+        systemctl restart NetworkManager
+    fi
+
+[group("utilities")]
+create-webapp:
+    ~/.local/share/dotfiles/scripts/install-webapp.sh
+
+[group("utilities")]
+remove-webapp:
+    ~/.local/share/dotfiles/scripts/remove-webapp.sh
