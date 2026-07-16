@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+fish_add_path ~/.local/bin
+
 function fish_greeting
     fastfetch -c ~/.config/fastfetch/paleofetch.jsonc
 end
@@ -71,6 +73,7 @@ end
 alias open 'xdg-open &>/dev/null'
 alias nano micro
 alias config-cli 'just -f ~/.local/share/dotfiles/Justfile'
+alias run0 '~/.local/bin/run0-sudo'
 alias zed zeditor
 alias f fuck
 
@@ -96,3 +99,5 @@ alias ...... 'cd ../../../../..'
 
 alias rollback 'run0 pacman-bootc rollback'
 alias update '~/.local/share/dotfiles/scripts/update.sh'
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
