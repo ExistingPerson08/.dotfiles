@@ -12,6 +12,7 @@ echo "=========================================="
 echo "      EXISTING PERSONS's .DOTFILES   "
 echo "=========================================="
 
+echo ""
 echo "⚠️  This will overwrite your configs and home folder."
 read -p "Do you want to continue? (y/n): " -n 1 -r
 echo ""
