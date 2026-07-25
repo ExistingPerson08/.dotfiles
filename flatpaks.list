@@ -7,7 +7,6 @@ org.gnome.Characters
 net.codelogistics.clicker
 io.github.wartybix.Constrict
 me.iepure.devtoolbox
-com.ranfdev.DistroShelf
 io.ente.photos
 org.garudalinux.firedragon
 com.github.tchx84.Flatseal
@@ -35,7 +34,6 @@ org.gnome.SoundRecorder
 com.spotify.Client
 net.supertuxkart.SuperTuxKart
 io.gitlab.adhami3310.Converter
-org.mapeditor.Tiled
 io.gitlab.theevilskeleton.Upscaler
 org.gnome.Showtime
 org.gnome.gitlab.YaLTeR.VideoTrimmer
