@@ -97,7 +97,7 @@ alias .... 'cd ../../..'
 alias ..... 'cd ../../../..'
 alias ...... 'cd ../../../../..'
 
-alias rollback 'run0 pacman-bootc rollback'
+alias rollback 'run0 bootc rollback'
 alias update '~/.local/share/dotfiles/scripts/update.sh'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
