@@ -59,6 +59,14 @@ xargs -a "$CLONE_DIR/packages.list" sudo rakuos install -y
 sudo rakuos setup-gaming
 
 echo ""
+echo "-- INSTALLING FONTS --"
+echo ""
+
+mkdir -pf ~/.local/share/fonts
+curl -L "https://github.com/IdreesInc/Monocraft/releases/download/v4.2.1/Monocraft.ttc" -o "$HOME/.local/share/fonts/Monocraft.ttc"
+fc-cache -fv
+
+echo ""
 echo "-- SETTING UP FOLDERS --"
 echo ""
 
