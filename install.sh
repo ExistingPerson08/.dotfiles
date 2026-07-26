@@ -46,6 +46,10 @@ echo ""
 flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 xargs -a "$CLONE_DIR/flatpaks.list" flatpak install --system -y
 
+FD_FILE="/tmp/firedragon.flatpak"
+curl -L  "https://gitlab.com/garuda-linux/firedragon/firedragon13/-/releases/v13.0.0-rc.27/downloads/firedragon-catppuccin.flatpak-x64.flatpak" -o "$FD_FILE"
+flatpak install -y --system "$FD_FILE"
+
 echo ""
 echo "-- INSTALLING PACKAGES --"
 echo ""

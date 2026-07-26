@@ -229,11 +229,3 @@ toggle-mac-randomization:
         echo "MAC randomization enabled."
         systemctl restart NetworkManager
     fi
-
-[group("utilities")]
-create-webapp:
-    ~/.local/share/dotfiles/scripts/install-webapp.sh
-
-[group("utilities")]
-remove-webapp:
-    ~/.local/share/dotfiles/scripts/remove-webapp.sh
