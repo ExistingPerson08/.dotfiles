@@ -62,7 +62,7 @@ echo ""
 echo "-- INSTALLING FONTS --"
 echo ""
 
-mkdir -pf ~/.local/share/fonts
+mkdir -p ~/.local/share/fonts
 curl -L "https://github.com/IdreesInc/Monocraft/releases/download/v4.2.1/Monocraft.ttc" -o "$HOME/.local/share/fonts/Monocraft.ttc"
 fc-cache -fv
 
