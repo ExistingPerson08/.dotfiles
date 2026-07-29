@@ -8,6 +8,9 @@ CLONE_DIR="/tmp/dotfiles-install"
 APP_CONFIG_DIR="$HOME/.var/app"
 WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
 
+xdg-user-dirs-update
+source "$HOME/.config/user-dirs.dirs"
+
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
