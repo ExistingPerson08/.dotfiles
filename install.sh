@@ -5,9 +5,6 @@ set -e
 REPO_URL="https://github.com/ExistingPerson08/.dotfiles.git"
 CLONE_DIR="/tmp/dotfiles-install"
 
-APP_CONFIG_DIR="$HOME/.var/app"
-WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
-
 xdg-user-dirs-update
 source "$HOME/.config/user-dirs.dirs"
 
@@ -23,6 +20,9 @@ XDG_MUSIC_DIR="${XDG_MUSIC_DIR:-$HOME/Music}"
 XDG_VIDEOS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}"
 XDG_PUBLICSHARE_DIR="${XDG_PUBLICSHARE_DIR:-$HOME/Public}"
 XDG_DESKTOP_DIR="${XDG_DESKTOP_DIR:-$HOME/Desktop}"
+
+APP_CONFIG_DIR="$HOME/.var/app"
+WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
 
 echo "=========================================="
 echo "      EXISTING PERSONS's .DOTFILES   "
