@@ -68,6 +68,7 @@ echo ""
 
 TEMP_DIR="$XDG_TEMPLATES_DIR"
 DOCS_DIR="${XDG_DOCUMENTS_DIR}"
+SRC_DIR="$CLONE_DIR/templates"
 cp -rv "$SRC_DIR"/* "$TEMP_DIR/"
 
 mkdir -p "$APP_CONFIG_DIR"
