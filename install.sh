@@ -5,30 +5,6 @@ set -e
 REPO_URL="https://github.com/ExistingPerson08/.dotfiles.git"
 CLONE_DIR="/tmp/dotfiles-install"
 
-xdg-user-dirs-update
-source "$HOME/.config/user-dirs.dirs"
-
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-XDG_DOCUMENTS_DIR="${XDG_DOCUMENTS_DIR:-$HOME/Documents}"
-XDG_PICTURES_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}"
-XDG_TEMPLATES_DIR="${XDG_TEMPLATES_DIR:-$HOME/Templates}"
-XDG_DOWNLOAD_DIR="${XDG_DOWNLOAD_DIR:-$HOME/Downloads}"
-XDG_MUSIC_DIR="${XDG_MUSIC_DIR:-$HOME/Music}"
-XDG_VIDEOS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}"
-XDG_PUBLICSHARE_DIR="${XDG_PUBLICSHARE_DIR:-$HOME/Public}"
-XDG_DESKTOP_DIR="${XDG_DESKTOP_DIR:-$HOME/Desktop}"
-
-APP_CONFIG_DIR="$HOME/.var/app"
-WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
-
-echo $XDG_PICTURES_DIR
-echo $WALLPAPERS_DIR
-
-exit
-
 echo "=========================================="
 echo "      EXISTING PERSONS's .DOTFILES   "
 echo "=========================================="
@@ -86,6 +62,25 @@ fc-cache -fv
 echo ""
 echo "-- SETTING UP FOLDERS --"
 echo ""
+
+xdg-user-dirs-update
+source "$HOME/.config/user-dirs.dirs"
+
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+XDG_DOCUMENTS_DIR="${XDG_DOCUMENTS_DIR:-$HOME/Documents}"
+XDG_PICTURES_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}"
+XDG_TEMPLATES_DIR="${XDG_TEMPLATES_DIR:-$HOME/Templates}"
+XDG_DOWNLOAD_DIR="${XDG_DOWNLOAD_DIR:-$HOME/Downloads}"
+XDG_MUSIC_DIR="${XDG_MUSIC_DIR:-$HOME/Music}"
+XDG_VIDEOS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}"
+XDG_PUBLICSHARE_DIR="${XDG_PUBLICSHARE_DIR:-$HOME/Public}"
+XDG_DESKTOP_DIR="${XDG_DESKTOP_DIR:-$HOME/Desktop}"
+
+APP_CONFIG_DIR="$HOME/.var/app"
+WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
 
 TEMP_DIR="$XDG_TEMPLATES_DIR"
 DOCS_DIR="${XDG_DOCUMENTS_DIR}"
