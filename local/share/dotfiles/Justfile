@@ -62,6 +62,7 @@ powerwash:
 
 [group("setups")]
 setup-modding:
+    #!/usr/bin/bash
     echo ""
     echo "Installing r2modman"
     echo ""
@@ -104,7 +105,7 @@ setup-touchscreen:
 [group("setups")]
 setup-workspace-rules:
     rm -f ~/.config/niri/workspaces.kdl
-    cp ~/local/share/dotfiles/configs/workspaces.kdl ~/.config/niri/
+    cp ~/.local/share/dotfiles/configs/workspaces.kdl ~/.config/niri/
 
 [group("setups")]
 install-plex:
