@@ -24,6 +24,11 @@ XDG_DESKTOP_DIR="${XDG_DESKTOP_DIR:-$HOME/Desktop}"
 APP_CONFIG_DIR="$HOME/.var/app"
 WALLPAPERS_DIR="$XDG_PICTURES_DIR/Wallpapers"
 
+echo $XDG_PICTURES_DIR
+echo $WALLPAPERS_DIR
+
+exit
+
 echo "=========================================="
 echo "      EXISTING PERSONS's .DOTFILES   "
 echo "=========================================="
