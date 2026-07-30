@@ -74,7 +74,6 @@ alias open 'xdg-open &>/dev/null'
 alias nano micro
 alias config-cli 'just -f ~/.local/share/dotfiles/Justfile'
 alias sudo '~/.local/bin/run0-sudo'
-alias zed zeditor
 alias f fuck
 
 alias neofetch fastfetch
