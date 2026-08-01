@@ -5,7 +5,7 @@ end
 fish_add_path ~/.local/bin
 
 function fish_greeting
-    fastfetch -c ~/.config/fastfetch/paleofetch.jsonc
+    fastfetch
 end
 
 function fish_prompt
@@ -13,7 +13,7 @@ function fish_prompt
 
     set_color cyan
     echo ""
-    echo -n "󰣇 "
+    echo -n " "
     set_color blue --bold
     echo -n (prompt_pwd)
 

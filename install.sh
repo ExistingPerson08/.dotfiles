@@ -138,5 +138,27 @@ if [ -d "$CLONE_DIR/templates" ]; then
 fi
 
 echo ""
+echo "-- APLYING SYSTEM TWEAKS --"
+echo ""
+
+SERVICE_PATH="/etc/systemd/system/ideapad-conservation.service"
+
+run0 tee "$SERVICE_PATH" > /dev/null << 'EOF'
+[Unit]
+Description=Zapnuti Lenovo IdeaPad Battery Conservation Mode
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+run0 systemctl enable ideapad-conservation.service
+run0 systemctl start ideapad-conservation.service
+
+echo ""
 echo "-- FINISH! --"
 echo ""
