@@ -14,8 +14,9 @@ RED='\033[0;31m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
+echo "Existing Person's"
 echo -e "\n${CYAN}======================================================"
-echo -e "                   Spacefin Update"
+echo -e "                    RakuOS Update Script"
 echo -e "======================================================${NC}"
 
 run_update() {
@@ -48,8 +49,8 @@ REBOOT_NEEDED=0
 
 # ---------------------------------------------------------------------
 
-# 1. Bootc Update
-run_update "bootc" "LC_ALL=C.UTF-8 run0 rakuos update"
+# 1. Rakuos Update
+run_update "rakuos" "run0 rakupkg upgrade"
 
 # Check if we need to reboot
 if command -v bootc &> /dev/null; then

@@ -92,7 +92,7 @@ no_self_update = true
 
 # Custom commands
 [commands]
-"System update (bootc)" = "run0 bootc update"
+"System update (bootc)" = "run0 rakupkg upgrade"
 # "Dotfiles update" = "spacefin-dotfiles update"
 
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
