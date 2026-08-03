@@ -159,6 +159,8 @@ EOF
 run0 systemctl enable ideapad-conservation.service
 run0 systemctl start ideapad-conservation.service
 run0 firewall-cmd --zone=public --add-port=9300/tcp
+run0 firewall-cmd --permanent --zone=home --add-service=kdeconnect
+run0 firewall-cmd --reload
 
 echo ""
 echo "-- FINISH! --"
