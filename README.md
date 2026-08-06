@@ -1,5 +1,5 @@
 # .dotfiles
-Moved to: (https://gitlab.com/ExistingPerson08/dotfiles)[https://gitlab.com/ExistingPerson08/dotfiles]
+Moved to: https://gitlab.com/ExistingPerson08/dotfiles
 
 My personal dotfiles
 
